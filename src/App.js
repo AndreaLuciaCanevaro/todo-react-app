@@ -1,23 +1,29 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import { useState } from "react";
+import ApiFetch from "./components/ApiFetch";
+import Form from "./components/Form";
+import Header from "./components/Header";
+import TodoList from "./components/TodoList";
 
 function App() {
+  /* to pass the 'todo' items to the Form we have to pass them as props (properties) todo=(todo), setTodo={setTodo}, etc */
+  const [todo,setTodo]=useState('');
+  const [todoList,setTodoList]=useState([]);
+  
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Header/>
+      <Form 
+        todo={todo} 
+        setTodo={setTodo} 
+        todoList={todoList} 
+        setTodoList={setTodoList}>
+      </Form>
+      <TodoList 
+        setTodoList={setTodoList} 
+        todoList={todoList}>
+      </TodoList>
+      <ApiFetch/>
     </div>
   );
 }
